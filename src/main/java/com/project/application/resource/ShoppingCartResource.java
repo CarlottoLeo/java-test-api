@@ -47,6 +47,17 @@ public class ShoppingCartResource {
 		return ResponseEntity.ok(product);
 	}
 	
+	@GetMapping("/{id}")
+	public ResponseEntity<Sku> buscar(@PathVariable Long id) {
+		Sku sku = shoppingcart.findOne(id);
+		
+		if (sku == null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		return ResponseEntity.ok(sku);
+	}
+	
 	@PutMapping("/{id}")
 	public ResponseEntity<Product> atualizar(@PathVariable Long id, 
 			@Valid @RequestBody Product product) {
