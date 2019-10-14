@@ -75,6 +75,19 @@ public class ShoppingCartResource {
 		
 		return ResponseEntity.noContent().build();
 	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> remover(@PathVariable Long id) {
+		Sku sku = shoppingcart.findOne(id);
+		
+		if (sku == null) {
+			return ResponseEntity.notFound().build();
+		}
+		
+		shoppingcart.delete(sku);
+		
+		return ResponseEntity.noContent().build();
+	}
 }
 
 
